@@ -6,8 +6,10 @@ import { Heading } from "@repo/ui/components/ui/heading";
 import Logo from "../../../../public/images/Logo-yellow.svg";
 import UploadBg from "../../../../public/images/uploading-bg.png";
 import { Button } from "@repo/ui/components/ui/button";
+import { Trans } from "@repo/ui/components/ui/trans";
 import { ImageUploader } from "../../common/imageUploader";
 
+import { useTranslation } from "react-i18next";
 import "./style.css";
 
 const secondsPerImage = 2000; // ms for unit
@@ -15,6 +17,7 @@ const secondsPerImage = 2000; // ms for unit
 const defaultImgs: string[] = new Array(6).fill(null);
 
 const UploadPage: React.FC = () => {
+  const { t } = useTranslation();
   const [images, setImages] = useState<string[]>(defaultImgs);
 
   const [isUploading, setIsUploading] = useState(false);
@@ -67,9 +70,7 @@ const UploadPage: React.FC = () => {
             <Image src={Logo} alt="Roast Logo" />
           </div>
           <Heading level={2} className="pt-16 mb-0 p-0 text-white text-center" children={'Upload your dating pics'}/>
-          <p className="mt-4 text-color text-white text-center">
-            {'To get your profile analysis'}
-          </p>
+          <Heading level={6} className="mt-3 text-color text-white text-center" children={'To get your profile analysis'} />
           <div className="grid grid-cols-3 grid-rows-3 gap-x-2 gap-y-4 px-3 mt-7">
             {images.map((image, i) => {
               return (

@@ -1,13 +1,14 @@
+'use client'
 import { Button } from "@repo/ui/components/ui/button";
 import Image from "next/image";
 import Logo from "../../../../public/images/Logo.svg";
-// import { useTranslation } from "react-i18next";
 import { Heading } from "@repo/ui/components/ui/heading";
 import HomeImg from "../../../../public/images/home_visual.png";
 import "./style.css";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
-    // const { t } = useTranslation();
+    const { t } = useTranslation(`common`);
   
     return (
       <main>
@@ -15,10 +16,8 @@ const HomePage = () => {
           <div className="pt-12 flex justify-center">
             <Image src={Logo} alt="Roast Logo" />
           </div>
-          <Heading level={2} className="mt-11 mb-0 p-0 text-white text-center" children={'Upload your dating pics'}/>
-          <p className="mt-3 text-color text-white text-center">
-            To get your profile analysis
-          </p>
+          <Heading level={2} className="mt-11 mb-0 p-0 text-white text-center" children={t(`common:upload_your_dating_pics`)}/>
+          <Heading level={6} className="mt-3 text-color text-white text-center" children={'To get your profile analysis'} />
           <div className="mt-11 text-center flex justify-center">
             <Image src={HomeImg} alt="Dating Home" width={250} />
           </div>

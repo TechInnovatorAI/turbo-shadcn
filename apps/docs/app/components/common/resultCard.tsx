@@ -51,27 +51,19 @@ const ResultCard: React.FC<ResultCardProps> = ({
       </CardHeader>
       <CardContent className="space-y-4 text-[rgba(255,255,255,0.8)] font-medium">
         <div>
-          <Heading level={4} className="font-medium">
-            Attractiveness
-          </Heading>
+          <Heading level={4} className="font-medium" children={'Attractiveness'} />
           <ProgressBar progress={scores.attractiveness} className="mt-2" />
         </div>
         <div>
-          <Heading level={4} className="font-medium">
-            Confidence
-          </Heading>
+          <Heading level={4} className="font-medium" children={'Confidence'} />
           <ProgressBar progress={scores.confidence} className="mt-2" />
         </div>
         <div>
-          <Heading level={4} className="font-medium">
-            Authenticity
-          </Heading>
+          <Heading level={4} className="font-medium" children={'Authenticity'} />
           <ProgressBar progress={scores.authenticity} className="mt-2" />
         </div>
         <div>
-          <Heading level={4} className="font-medium">
-            Potential
-          </Heading>
+          <Heading level={4} className="font-medium" children={'Potential'}/>
           <ProgressBar
             progress={scores.potential}
             className="mt-2"
