@@ -8,6 +8,8 @@ import UploadBg from "../../../../public/images/uploading-bg.png";
 import { Button } from "@repo/ui/components/ui/button";
 import { Trans } from "@repo/ui/components/ui/trans";
 import { ImageUploader } from "../../common/imageUploader";
+import { Alert, AlertTitle, AlertDescription } from "@repo/ui/components/ui/alert";
+
 
 import { useTranslation } from "react-i18next";
 import "./style.css";
@@ -17,11 +19,12 @@ const secondsPerImage = 2000; // ms for unit
 const defaultImgs: string[] = new Array(6).fill(null);
 
 const UploadPage: React.FC = () => {
-  const { t } = useTranslation();
   const [images, setImages] = useState<string[]>(defaultImgs);
 
   const [isUploading, setIsUploading] = useState(false);
   const [loadStr, setLoadStr] = useState("");
+  const [background, setBackground] = useState("");
+  const [isShowAlert, setIsShowAlert] = useState(false);
 
   useEffect(() => {
     if (!isUploading) {
@@ -40,12 +43,25 @@ const UploadPage: React.FC = () => {
 
   useEffect(() => {
     if (isUploading) {
-      const imgs = images.filter((e) => e);
+      const imgs: string[] = images.filter((e) => e);
       const time = imgs.length * secondsPerImage;
       const timer = setTimeout(() => {
         window.location.href = "/result";
       }, time);
-      return () => clearTimeout(timer);
+      setBackground(imgs[0] || "");
+      let no = 0;
+      const intervalTimer = setInterval(() => {
+        no++;
+        if (no >= imgs.length) {
+          no = 0;
+        }
+        console.log({ no });
+        setBackground(imgs[no] || "");
+      }, 2000);
+      return () => {
+        clearTimeout(timer);
+        clearInterval(intervalTimer);
+      };
     }
   }, [isUploading, images]);
 
@@ -59,8 +75,20 @@ const UploadPage: React.FC = () => {
   };
 
   const showUploading = () => {
+    const imgs: string[] = images.filter((e) => e);
+    if (!imgs.length) {
+      setIsShowAlert(true);
+      return;
+    }
     setIsUploading(true);
   };
+
+  useEffect(() => {
+    isShowAlert &&
+      setTimeout(() => {
+        setIsShowAlert(false);
+      }, 5000);
+  }, [isShowAlert]);
 
   return (
     <main>
@@ -131,6 +159,17 @@ const UploadPage: React.FC = () => {
           </div>
         </>
       )}
+      <div
+        className={`fixed w-80 right-8 bottom-0 ${isShowAlert ? "" : "hidden"}`}
+      >
+        <Alert
+          variant={"warning"}
+          className={`absolute transition-all delay-75 ${isShowAlert ? "bottom-8 opacity-100" : "bottom-0 opacity-30"}`}
+        >
+          <AlertTitle>Warning!</AlertTitle>
+          <AlertDescription>Please select a image to upload</AlertDescription>
+        </Alert>
+      </div>
     </main>
   );
 };
