@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Heading } from "@repo/ui/components/ui/heading";
 import Logo from "../../../../public/images/Logo-yellow.svg";
 import UploadBg from "../../../../public/images/uploading-bg.png";
+import Bomb from "../../../../public/images/uploading.png";
 import { Button } from "@repo/ui/components/ui/button";
 import { Trans } from "@repo/ui/components/ui/trans";
 import { ImageUploader } from "../../common/imageUploader";
@@ -97,7 +98,7 @@ const UploadPage: React.FC = () => {
           <div className="mt-14 flex justify-center">
             <Image src={Logo} alt="Roast Logo" />
           </div>
-          <Heading level={2} className="pt-16 mb-0 p-0 text-white text-center" children={'Upload your dating pics'}/>
+          <Heading level={2} className="pt-16 mb-0 p-0 text-white text-center" children={'Upload your dating pics'} />
           <Heading level={6} className="mt-3 text-color text-white text-center" children={'To get your profile analysis'} />
           <div className="grid grid-cols-3 grid-rows-3 gap-x-2 gap-y-4 px-3 mt-7">
             {images.map((image, i) => {
@@ -119,7 +120,7 @@ const UploadPage: React.FC = () => {
               className="bg-primary py-4 text-center px-[88px] rounded-full h-[58px]"
               onClick={showUploading}
             >
-              <Heading level={4} className="mb-0 p-0 text-white text-center" children={'Analyze it!'}/>
+              <Heading level={4} className="mb-0 p-0 text-white text-center" children={'Analyze it!'} />
             </Button>
           </div>
         </>
@@ -137,7 +138,7 @@ const UploadPage: React.FC = () => {
           </div>
           <div
             className={`fixed top-0 left-0 w-full h-full bg-cover bg-black`}
-            style={{ backgroundImage: `url('${UploadBg.src}'` }}
+            style={{ backgroundImage: `url('${background || UploadBg.src}'` }}
           ></div>
           <div
             className={`fixed top-0 left-0 w-full h-full flex justify-center items-center`}
@@ -147,7 +148,9 @@ const UploadPage: React.FC = () => {
             }}
           >
             <div className="w-[316px] h-[186px] text-center text-wrap flex flex-col justify-between">
-              <div className="w-16 h-16"></div>
+              <div className="w-16 h-16 m-auto">
+                <Image src={Bomb} alt="Bomb" className="w-full" />
+              </div>
               <Heading
                 level={2}
                 className="pt-16 mb-0 p-0 text-white text-center font-bold"
